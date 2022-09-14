@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Table, HeaderCell, Cell } from "../styled/Table";
 
 export const MiscStats = ({ teamId, season }) => {
   const keys = {
@@ -41,28 +42,39 @@ export const MiscStats = ({ teamId, season }) => {
   return (
     <div>
       <h2>Team Misc Stats</h2>
-      <table>
+      <Table>
         <tbody>
           <tr>
-            <th colSpan={11}></th>
-            <th colSpan={2}>Advanced</th>
-            <th colSpan={4}>Offense Four Factors</th>
-            <th colSpan={4}>Defense Four Factors</th>
+            <HeaderCell as="th" colSpan={11}></HeaderCell>
+            <HeaderCell as="th" colSpan={2}>
+              Advanced
+            </HeaderCell>
+            <HeaderCell as="th" colSpan={4}>
+              Offense Four Factors
+            </HeaderCell>
+            <HeaderCell as="th" colSpan={4}>
+              Defense Four Factors
+            </HeaderCell>
+            <HeaderCell as="th" colSpan={2}></HeaderCell>
           </tr>
           <tr>
-            <th scope="col"> </th>
+            <HeaderCell as="th" scope="col">
+              {" "}
+            </HeaderCell>
             {Object.keys(keys).map((key) => (
-              <th key={key}>{keys[key]}</th>
+              <HeaderCell as="th" key={key}>
+                {keys[key]}
+              </HeaderCell>
             ))}
           </tr>
           <tr>
-            <td>Team</td>
+            <HeaderCell as="th">Team</HeaderCell>
             {Object.keys(keys).map((key) => (
-              <td key={key}>{stats[key]}</td>
+              <Cell key={key}>{stats[key]}</Cell>
             ))}
           </tr>
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };

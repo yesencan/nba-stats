@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { Table, HeaderCell, Cell } from "../styled/Table";
+import { WheatLink } from "../styled/WheatLink";
 const Roster = ({ teamId, season }) => {
   const [players, setPlayers] = useState([]);
 
@@ -19,18 +19,20 @@ const Roster = ({ teamId, season }) => {
     <>
       <h2>Players</h2>
       {players.length !== 0 ? (
-        <table>
+        <Table>
           <tbody>
             <tr>
               {Object.keys(players[0]).map((key, index) => (
-                <th key={index}>{key} </th>
+                <HeaderCell as="th" key={index}>
+                  {key}{" "}
+                </HeaderCell>
               ))}
             </tr>
             {players.map((p, index) => (
               <RosterPlayerRow player={p} key={index} />
             ))}
           </tbody>
-        </table>
+        </Table>
       ) : null}
     </>
   );
@@ -54,13 +56,13 @@ const RosterPlayerRow = ({ player }) => {
   return (
     <tr>
       {Object.keys(player).map((key, index) => (
-        <td key={index}>
+        <Cell key={index}>
           {key === "PLAYER" ? (
-            <Link to={`/players/${nameKey}`}>{player.PLAYER}</Link>
+            <WheatLink to={`/players/${nameKey}`}>{player.PLAYER}</WheatLink>
           ) : (
             player[key]
           )}
-        </td>
+        </Cell>
       ))}
     </tr>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { Table, HeaderCell, Cell } from "../styled/Table";
 export const RosterStats = ({ teamId, season, type }) => {
   const titles = {
     per_game: "Per Game",
@@ -22,22 +22,24 @@ export const RosterStats = ({ teamId, season, type }) => {
   return (
     <div>
       <h2>{titles[type]}</h2>
-      <table>
+      <Table>
         <tbody>
           <tr key={0}>
             {Object.keys(stats[0]).map((key) => (
-              <th key={key}>{key}</th>
+              <HeaderCell as="th" key={key}>
+                {key}
+              </HeaderCell>
             ))}
           </tr>
           {stats.map((line, index) => (
             <tr key={index}>
               {Object.keys(line).map((key, index) => (
-                <td key={index}>{line[key]}</td>
+                <Cell key={index}>{line[key]}</Cell>
               ))}
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };

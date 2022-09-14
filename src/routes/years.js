@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
+import { Table, HeaderCell, Cell } from "../styled/Table";
+import { WheatLink } from "../styled/WheatLink";
 const Years = () => {
   const params = useParams();
   const [years, setYears] = useState([]);
@@ -19,30 +20,32 @@ const Years = () => {
   return (
     <div>
       <h2>{years.length} Seasons Available</h2>
-      <table>
+      <Table>
         <tbody>
           <tr>
             {headers.map((header, index) => (
-              <th key={index}>{header}</th>
+              <HeaderCell as="th" key={index}>
+                {header}
+              </HeaderCell>
             ))}
           </tr>
           {years.map((year, index) => (
             <tr key={index}>
               {headers.map((header, index) =>
                 header === "SEASON" ? (
-                  <td key={index}>
-                    <Link to={`/teams/${params.teamId}/${year.year}/main`}>
+                  <Cell key={index}>
+                    <WheatLink to={`/teams/${params.teamId}/${year.year}`}>
                       {year.stats[0][header]}
-                    </Link>{" "}
-                  </td>
+                    </WheatLink>{" "}
+                  </Cell>
                 ) : (
-                  <td key={index}>{year.stats[0][header]}</td>
+                  <Cell key={index}>{year.stats[0][header]}</Cell>
                 )
               )}
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import Player from "./routes/player";
 import Main from "./components/Main";
 import LetterPlayerList from "./routes/letter_player_list";
 import MainPlayerList from "./routes/main_player_list";
+import "./styles.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -18,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="teams" element={<Teams />} />
         <Route path="teams/:teamId" element={<TeamGeneral />}>
           <Route index element={<Years />} />
-          <Route path=":season/main" element={<TeamMain />} />
+          <Route path=":season" element={<TeamMain />} />
         </Route>
         <Route path="players/list" element={<MainPlayerList />} />
         <Route path="players/list/:letter" element={<LetterPlayerList />} />

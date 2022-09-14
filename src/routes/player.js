@@ -1,7 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { MainSection } from "../styled/MainSection";
+import styled from "styled-components";
+import { Table, HeaderCell, Cell } from "../styled/Table";
 
+const Headshot = styled.img`
+  height: 240px;
+  width: 180px;
+`;
 const Player = () => {
   const params = useParams();
   const [regular, setRegular] = useState([{}]);
@@ -43,10 +50,10 @@ const Player = () => {
     setRenderImg(false);
   };
   return renderPage ? (
-    <div>
+    <MainSection>
       <h1>{player.name}</h1>
       {player.headshot && renderImg ? (
-        <img
+        <Headshot
           alt={`headshot of ${player.name}`}
           src={player.headshot}
           onError={imgErrorHandler}
@@ -54,9 +61,9 @@ const Player = () => {
       ) : null}
       {regular.length !== 0 ? <RegularSeasonTable regular={regular} /> : null}
       {playoff.length !== 0 ? <PlayoffTable playoff={playoff} /> : null}
-    </div>
+    </MainSection>
   ) : (
-    <div>Coming soon...</div>
+    <MainSection>Coming soon...</MainSection>
   );
 };
 
@@ -64,22 +71,24 @@ const RegularSeasonTable = ({ regular }) => {
   return (
     <div>
       <h2>Regular Season Stats</h2>
-      <table>
+      <Table>
         <tbody>
           <tr>
             {Object.keys(regular[0]).map((key, index) => (
-              <th key={index}>{key} </th>
+              <HeaderCell as="th" key={index}>
+                {key}{" "}
+              </HeaderCell>
             ))}
           </tr>
           {regular.map((season, index) => (
             <tr key={index}>
               {Object.keys(season).map((key, index) => (
-                <td key={index}>{season[key]} </td>
+                <Cell key={index}>{season[key]} </Cell>
               ))}
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };
@@ -87,22 +96,24 @@ const PlayoffTable = ({ playoff }) => {
   return (
     <div>
       <h2>Playoff Stats</h2>
-      <table>
+      <Table>
         <tbody>
           <tr>
             {Object.keys(playoff[0]).map((key, index) => (
-              <th key={index}>{key} </th>
+              <HeaderCell as="th" key={index}>
+                {key}{" "}
+              </HeaderCell>
             ))}
           </tr>
           {playoff.map((season, index) => (
             <tr key={index}>
               {Object.keys(season).map((key, index) => (
-                <td key={index}>{season[key]} </td>
+                <Cell key={index}>{season[key]} </Cell>
               ))}
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };

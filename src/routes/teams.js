@@ -1,25 +1,30 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Table, HeaderCell, Cell } from "../styled/Table";
+import { MainSection } from "../styled/MainSection";
+import { WheatLink } from "../styled/WheatLink";
 const Teams = () => {
   const [teams, setTeams] = useState([{}]);
   useEffect(() => {
     axios
-      .get(`https://winter-sky-7874.fly.dev/api/teamtablerow`)
+      .get(`https://winter-sky-7874.fly.dev/api/teamTablerow`)
       .then((response) => {
         setTeams(response.data);
       });
   }, []);
 
   return (
-    <div>
+    <MainSection>
       <h1>Active Franchises</h1>
-      <table>
+      <Table>
         <tbody>
           <tr>
             {Object.keys(teams[0]).map((key, index) =>
-              key !== "key" ? <th key={index}>{key}</th> : null
+              key !== "key" ? (
+                <HeaderCell as="th" key={index}>
+                  {key}
+                </HeaderCell>
+              ) : null
             )}
           </tr>
           {teams.map((team, indext) => (
@@ -30,22 +35,24 @@ const Teams = () => {
                   switch (key) {
                     case "Franchise":
                       return (
-                        <td key={index}>
-                          <Link to={`/teams/${team.key}`}>{team[key]}</Link>
-                        </td>
+                        <Cell key={index}>
+                          <WheatLink to={`/teams/${team.key}`}>
+                            {team[key]}
+                          </WheatLink>
+                        </Cell>
                       );
                     case "key":
                       break;
                     default:
-                      return <td key={index}>{team[key]}</td>;
+                      return <Cell key={index}>{team[key]}</Cell>;
                   }
                 })
               }
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </MainSection>
   );
 };
 

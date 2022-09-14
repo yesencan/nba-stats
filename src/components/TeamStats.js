@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Table, HeaderCell, Cell } from "../styled/Table";
 
 export const TeamStats = ({ teamId, season }) => {
   const statHeaders = [
@@ -58,39 +59,41 @@ export const TeamStats = ({ teamId, season }) => {
   return (
     <>
       <h2>Team and Opponent Stats</h2>
-      <table>
+      <Table>
         <tbody>
           <tr>
             {statHeaders.map((head) => (
-              <th key={head}>{head}</th>
+              <HeaderCell as="th" key={head}>
+                {head}
+              </HeaderCell>
             ))}
           </tr>
           <tr>
-            <td>Team</td>
+            <HeaderCell as="th">Team</HeaderCell>
             {Object.keys(totalTeamStats).map((key) => (
-              <td key={key}>{totalTeamStats[key]}</td>
+              <Cell key={key}>{totalTeamStats[key]}</Cell>
             ))}
           </tr>
           <tr>
-            <td>Team/G</td>
+            <HeaderCell as="th">Team/G</HeaderCell>
             {Object.keys(perTeamStats).map((key) => (
-              <td key={key}>{perTeamStats[key]}</td>
+              <Cell key={key}>{perTeamStats[key]}</Cell>
             ))}
           </tr>
           <tr>
-            <td>Opponent</td>
+            <HeaderCell as="th">Opponent</HeaderCell>
             {Object.keys(totalOppStats).map((key) => (
-              <td key={key}>{totalOppStats[key]}</td>
+              <Cell key={key}>{totalOppStats[key]}</Cell>
             ))}
           </tr>
           <tr>
-            <td>Opponent/G</td>
+            <HeaderCell as="th">Opponent/G</HeaderCell>
             {Object.keys(perOppStats).map((key) => (
-              <td key={key}>{perOppStats[key]}</td>
+              <Cell key={key}>{perOppStats[key]}</Cell>
             ))}
           </tr>
         </tbody>
-      </table>
+      </Table>
     </>
   );
 };
