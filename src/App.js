@@ -22,7 +22,7 @@ const App = () => {
   return (
     <div>
       <Header>
-        <TitleLink to="/">nba-stats</TitleLink>{" "}
+        <TitleLink to="/">NBA-Stats</TitleLink>{" "}
       </Header>
       <StyledApp>
         <Outlet />
