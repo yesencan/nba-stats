@@ -1,15 +1,16 @@
 import { getNames } from "../utils/name_list";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { MainSection } from "../styled/MainSection";
+import { WheatLink } from "../styled/WheatLink";
 const MainPlayerList = () => {
   const names = getNames();
   return (
-    <div>
+    <MainSection>
       {Object.keys(names).map((key, index) => (
         <div key={index}>
           <h2>
-            <Link to={`/players/list/${key}`}>{key}</Link>{" "}
+            <WheatLink to={`/players/list/${key}`}>{key}</WheatLink>{" "}
           </h2>
           {names[key].map((name, index) => (
             <Name nameKey={name} key={index} />
@@ -17,7 +18,7 @@ const MainPlayerList = () => {
           ...
         </div>
       ))}
-    </div>
+    </MainSection>
   );
 };
 
@@ -32,7 +33,7 @@ const Name = ({ nameKey }) => {
   }, [nameKey]);
   return (
     <span>
-      <Link to={`/players/${nameKey}`}>{name}</Link>,{" "}
+      <WheatLink to={`/players/${nameKey}`}>{name}</WheatLink>,{" "}
     </span>
   );
 };

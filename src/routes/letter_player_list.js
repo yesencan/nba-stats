@@ -1,7 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
+import { MainSection } from "../styled/MainSection";
+import { WheatLink } from "../styled/WheatLink";
+import styled from "styled-components";
+const PlayerLink = styled(WheatLink)`
+  font-size: 17px;
+`;
 const LetterPlayerList = () => {
   const params = useParams();
   const [players, setPlayers] = useState([]);
@@ -18,11 +23,13 @@ const LetterPlayerList = () => {
   }, [params]);
 
   return (
-    <ul style={{ columns: 4 }}>
-      {players.map((player, index) => (
-        <Player player={player} key={index} />
-      ))}
-    </ul>
+    <MainSection>
+      <ul style={{ columns: 4 }}>
+        {players.map((player, index) => (
+          <Player player={player} key={index} />
+        ))}
+      </ul>
+    </MainSection>
   );
 };
 
@@ -37,7 +44,7 @@ const Player = ({ player }) => {
   }, [player]);
   return (
     <li>
-      <Link to={`/players/${player.key}`}>{name}</Link>{" "}
+      <PlayerLink to={`/players/${player.key}`}>{name}</PlayerLink>{" "}
     </li>
   );
 };
